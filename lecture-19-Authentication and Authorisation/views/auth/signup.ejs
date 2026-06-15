@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up for Airbnb</title>
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+  <body
+    class="flex flex-col items-center min-h-screen bg-gray-50 text-gray-900 font-sans mt-10"
+  >
+    <%- include('../partials/nav.ejs') %>
+    <div
+      class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-10"
+    >
+      <header class="px-8 pt-8 pb-4 text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">
+          Create an Account
+        </h1>
+        <p class="text-sm text-gray-500">
+          Enter your details to get started.
+        </p>
+      </header>
+
+      <main class="px-8 pb-8">
+        <form
+          action="/signup"
+          method="POST"
+          class="space-y-5"
+        >
+    <%- include('../partials/errors.ejs') %>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                for="firstName"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="John"
+                value="<%= oldInput.firstName?oldInput.firstName:"" %>"
+                required
+                class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="lastName"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Doe"
+                value="<%= oldInput.lastName?oldInput.lastName:"" %>"
+                class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              value="<%= oldInput.email?oldInput.email:"" %>"
+              required
+              class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                required
+                class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="confirmPassword"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Confirm
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="••••••••"
+                required
+                class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+  <span class="block text-sm font-medium text-gray-700 mb-2">
+    I want to...
+  </span>
+  <div class="flex items-center space-x-6">
+    <label class="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="userType"
+        value="guest"
+        required
+        class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
+      />
+      <span class="ml-2 text-sm text-gray-900">Travel as a Guest</span>
+    </label>
+
+    <label class="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="userType"
+        value="host"
+        required
+        class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300"
+      />
+      <span class="ml-2 text-sm text-gray-900">Host my home</span>
+    </label>
+  </div>
+</div>
+
+          <div class="flex items-center mt-2">
+            <input
+              id="terms"
+              name="terms"
+              type="checkbox"
+              required
+              class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
+            />
+            <label for="terms" class="ml-2 block text-sm text-gray-900">
+              I agree to the
+              <a href="#" class="text-emerald-600 hover:text-emerald-500 font-medium">Terms and Conditions</a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full flex justify-center items-center px-6 py-3.5 mt-4 bg-emerald-600 text-white rounded-xl text-base font-semibold shadow-sm hover:bg-emerald-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-200"
+          >
+            Sign Up
+          </button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

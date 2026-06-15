@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb | Index Page is here</title>
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+  <body class="flex flex-col items-center min-h-screen bg-gray-50 font-sans">
+    <%- include('../partials/nav.ejs') %>
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden text-center flex flex-col max-h-[90vh]">
+      
+      <div class="p-8 flex-shrink-0">
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 mb-6">
+          <svg class="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+        </div>
+
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">
+          Your Index Page
+        </h1>
+        <p class="text-sm text-gray-500 mb-4">
+          Start managing your properties and hosting guests today.
+        </p>
+      </div>
+
+      <div class="px-8 pb-4 overflow-y-auto flex-grow custom-scrollbar">
+        <div class="space-y-8">
+          
+          <% regHomes.forEach(home => { %>
+            <div class="bg-white block max-w-sm mx-auto border border-gray-200 rounded-xl shadow-sm overflow-hidden text-left hover:shadow-md transition-shadow duration-200">
+                <a href="<%= home.link %>" target="_blank">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=600" alt="Home image" />
+                </a>
+                <div class="p-6 text-center">
+                    <span class="inline-flex items-center bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-2 py-1 rounded-md mb-2">
+                        <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/>
+                        </svg>
+                        Rating • <%= home.rating %> Stars
+                    </span>
+                    <a href="<%= home.link %>" target="_blank">
+                        <h5 class="mt-2 text-xl font-semibold tracking-tight text-gray-900 mb-1"><%= home.user_name %></h5>
+                    </a>
+                    <p class="text-sm text-gray-500 mb-5">
+                        <%= home.location %> • <span class="font-bold text-gray-900">$<%= home.price %></span>/night
+                    </p>
+                    <a href="<%= home.link %>" target="_blank" class="inline-flex items-center text-white bg-emerald-600 border border-transparent hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200 shadow-sm font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                        View Listing
+                        <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+          <% }) %>
+
+        </div>
+      </div>
+
+      <div class="px-8 pb-8 pt-4 flex-shrink-0">
+        <a
+          href="/host/add-home"
+          class="w-full flex justify-center items-center px-6 py-3.5 bg-gray-900 text-white rounded-xl text-base font-semibold shadow-sm hover:bg-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all duration-200"
+        >
+          Add Another Home
+        </a>
+      </div>
+
+    </div>
+
+  </body>
+</html>

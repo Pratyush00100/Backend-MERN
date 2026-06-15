@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to Airbnb</title>
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+  <body
+    class="flex flex-col items-center min-h-screen bg-gray-50 text-gray-900 font-sans mt-10"
+  >
+    <%- include('../partials/nav.ejs') %>
+    <div
+      class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+    >
+      <header class="px-8 pt-8 pb-4 text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">
+          Login to Airbnb
+        </h1>
+        <p class="text-sm text-gray-500">
+          Enter your login details to get started.
+        </p>
+      </header>
+
+      <main class="px-8 pb-8">
+        <form
+          action="/login"
+          method="POST"
+          class="space-y-5"
+        >
+          <div>
+            <label
+              for="username"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              required
+              class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full flex justify-center items-center px-6 py-3.5 mt-2 bg-emerald-600 text-white rounded-xl text-base font-semibold shadow-sm hover:bg-emerald-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-200"
+          >
+            Login
+          </button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
