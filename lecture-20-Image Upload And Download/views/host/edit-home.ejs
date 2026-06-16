@@ -27,6 +27,7 @@
           action="/host/<%= editing ? 'edit-home' : 'add-home' %>"
           method="POST"
           class="space-y-5"
+          enctype="multipart/form-data"
         >
           <input type="hidden" name="id" value="<%= editing? home._id:''%>" />
           <div>
@@ -128,7 +129,7 @@
                 max="5"
                 class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
               >
-<%= editing? home.description:''%></textarea
+                <%= editing? home.description:''%></textarea
               >
             </div>
           </div>
@@ -141,11 +142,10 @@
               Listing Link
             </label>
             <input
-              type="url"
+              type="file"
               id="link"
               name="link"
-              value="<%= editing? home.link:''%>"
-              placeholder="https://..."
+              accept="image/jpg , image/jpeg ,image/png"
               class="block w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-200 sm:text-sm"
             />
           </div>

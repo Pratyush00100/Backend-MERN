@@ -1,3 +1,4 @@
+const { convertProcessSignalToExitCode } = require("node:util");
 const Home = require("../model/home");
 const User = require("../model/user");
 
@@ -61,7 +62,15 @@ exports.postEditHome = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   console.log("Home added successfully");
   console.log("home registration successfull for : ", req.body.user_name);
-  const { user_name, location, price, rating, link, description } = req.body;
+  const { user_name, location, price, rating, description } = req.body;
+  if (!req.file) {
+    console.log("Incompaitable file type");
+    return res.redirect("/host/add-home");
+  }
+
+  const link = req.file.path;
+  console.log(req.file);
+
   const home = new Home({
     user_name,
     location,

@@ -10,27 +10,49 @@ const { default: mongoose } = require("mongoose");
 const authRouter = require("./routes/authRouter");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const multer = require("multer");
 
 const DB_PATH =
   "mongodb+srv://pratyush:root@cluster0.sigqsdh.mongodb.net/?appName=Cluster0/airbnb";
 
-
 const app = express();
+const storageOptions = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Uploads/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueName =
+      Date.now() + "-" + file.originalname.replace(/\s+/g, "_");
+    cb(null, uniqueName);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (["image/jpg", "image/jpeg", "image/png"].includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.urlencoded());
+app.use(
+  multer({ storage: storageOptions, fileFilter: fileFilter }).single("link"),
+);
+app.use(express.static(path.join(rootDir, "public")));
 
 const store = new MongoDBStore({
-  uri:DB_PATH,
-  collection:"sessions"
-})
+  uri: DB_PATH,
+  collection: "sessions",
+});
 app.use(
   session({
     secret: "pressure is privilage",
     resave: false,
     saveUninitialized: true,
-    store:store,
+    store: store,
   }),
 );
 app.use((req, res, next) => {
@@ -47,7 +69,6 @@ app.use("/host", (req, res, next) => {
 });
 app.use("/host", hostRouter);
 app.use(authRouter);
-app.use(express.static(path.join(rootDir, "public")));
 
 app.use(pathError);
 
