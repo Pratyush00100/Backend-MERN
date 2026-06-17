@@ -1,4 +1,4 @@
-# Backend MERN Development Repository
+# Backend MERN Development
 
 This repository contains a comprehensive, step-by-step progression through backend development using the MERN (MongoDB, Express.js, React, Node.js) stack. It spans from fundamental Node.js concepts to building a full-stack application with a RESTful API and a React frontend.
 
