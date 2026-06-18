@@ -3,35 +3,45 @@ import AddTodo from "./components/AddTodo";
 import TodoItems from "./components/TodoItems";
 import WelcomeMessage from "./components/WelcomeMessage";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addItem, deleteItem, getItems } from "./services/itemsService";
 
 function App() {
   const [todoItems, setTodoItems] = useState([]);
 
-  const handleNewItem = (itemName, itemDueDate) => {
+  useEffect(() => {
+    getItems().then((initialItems) => {
+      setTodoItems(initialItems);
+    });
+  }, []);
+
+  const handleNewItem = async (itemName, itemDueDate) => {
     console.log(`New Item Added: ${itemName} Date:${itemDueDate}`);
-    const newTodoItems = [
-      ...todoItems,
-      { name: itemName, dueDate: itemDueDate },
-    ];
+    const item = await addItem(itemName, itemDueDate);
+    const newTodoItems = [...todoItems, item];
     setTodoItems(newTodoItems);
   };
 
-  const handleDeleteItem = (todoItemName) => {
-    const newTodoItems = todoItems.filter((item) => item.name !== todoItemName);
+  const handleDeleteItem = async (id) => {
+    const deletedId = await deleteItem(id);
+    const newTodoItems = todoItems.filter((item) => item.id !== deletedId);
     setTodoItems(newTodoItems);
   };
 
   return (
-    <center className="todo-container">
-      <AppName />
-      <AddTodo onNewItem={handleNewItem} />
-      {todoItems.length === 0 && <WelcomeMessage></WelcomeMessage>}
-      <TodoItems
-        todoItems={todoItems}
-        onDeleteClick={handleDeleteItem}
-      ></TodoItems>
-    </center>
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-violet-100">
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        <AppName />
+
+        <AddTodo onNewItem={handleNewItem} />
+
+        {todoItems.length === 0 ? (
+          <WelcomeMessage />
+        ) : (
+          <TodoItems todoItems={todoItems} onDeleteClick={handleDeleteItem} />
+        )}
+      </div>
+    </div>
   );
 }
 
